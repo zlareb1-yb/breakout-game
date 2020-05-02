@@ -4,8 +4,8 @@ let ctx = canvas.getContext('2d')
 
 let x = canvas.width/2;
 let y = canvas.height - 30;
-let dx = 2;
-let dy = -2;
+let dx = 5;
+let dy = -5;
 let ballRadius = 10;
 let paddleHeight = 10;
 let paddleWidth = 75;
@@ -22,15 +22,21 @@ let brickOffsetLeft = 30;
 let score = 0;
 let lives = 3;
 let level = 1;
+let maxLevel = 5
 
 let bricks = [];
 
-for(let c = 0; c < brickColumnCount; c++) {
-	bricks[c] = [];
-	for(let r = 0; r < brickRowCount; r++) {
-		bricks[c][r] = {x : 0, y: 0, status: 1};
-	}
+initBricks();
+
+function initBricks() {
+	for(let c = 0; c < brickColumnCount; c++) {
+		bricks[c] = [];
+		for(let r = 0; r < brickRowCount; r++) {
+			bricks[c][r] = {x : 0, y: 0, status: 1};
+		}
+	}	
 }
+
 
 document.addEventListener("keydown", keyDownHandler);
 document.addEventListener("keyup", keyUpHandler);
@@ -101,6 +107,8 @@ function collisionDetection() {
 							document.location.reload();
 						} else {
 							level++;
+							initBricks();
+							score = 0;
 							// Start next level
 						}
 					}
@@ -122,6 +130,12 @@ function drawLives() {
 	ctx.fillText("Lives: " + lives, canvas.width-65, 20);
 }
 
+function drawLevel() {
+	ctx.font = "16px Arial";
+	ctx.fillStyle = "#0095DD";
+	ctx.fillText("Level: " + level, 210, 20);	
+}
+
 function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawBall();
@@ -129,6 +143,7 @@ function draw() {
 	drawScore();
 	drawLives();
 	drawBricks(); 
+	drawLevel();
 	collisionDetection();
 
 	if((y + dy) < ballRadius) {
@@ -145,8 +160,6 @@ function draw() {
 			} else {
 				x = canvas.width/2;
 				y = canvas.height-30;
-				dx = 2;
-				dy = -2;
 				paddleX = (canvas.width-paddleWidth)/2;
 			}
 		}
