@@ -23,6 +23,7 @@ let score = 0;
 let lives = 3;
 let level = 1;
 let maxLevel = 5
+let paused = false;
 
 let bricks = [];
 
@@ -107,9 +108,27 @@ function collisionDetection() {
 							document.location.reload();
 						} else {
 							level++;
+							brickRowCount++;
 							initBricks();
 							score = 0;
-							// Start next level
+							dx += 1;
+							dy = -dy;
+							dy -= 1;
+							x = canvas.width/2;
+							y = canvas.height - 30;
+							paddleX = (canvas.width - paddleWidth)/2;
+							paused = true;
+							ctx.beginPath();
+							ctx.rect(0, 0, canvas.width, canvas.height);
+							ctx.fillStyle = '#0095DD'
+							ctx.fill();
+							ctx.font = "16px Arial";
+							ctx.fillStyle = "#FFFFFF";
+							ctx.fillText("Level " + (level - 1) + " completed, starting next level...")
+							setTimeout(function() {
+								paused = false;
+								draw();
+							}, 3000);
 						}
 					}
 				}
@@ -177,7 +196,10 @@ function draw() {
 
 	x += dx;
 	y += dy;
-	requestAnimationFrame(draw)
+
+	if(!paused) {
+		requestAnimationFrame(draw)
+	}
 }
 
 document.addEventListener("mousemove", mouseMoveHandler);
