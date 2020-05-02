@@ -2,10 +2,10 @@ let canvas = document.getElementById('myCanvas')
 let ctx = canvas.getContext('2d')
 
 
-let x = canvas.width/2;
-let y = canvas.height - 30;
-let dx = 5;
-let dy = -5;
+let x = (canvas.width/2) + Math.floor(Math.random()*21)-10;
+let y = (canvas.height - 30) + Math.floor(Math.random()*21)-10;
+let dx = 1;
+let dy = -1;
 let ballRadius = 10;
 let paddleHeight = 10;
 let paddleWidth = 75;
@@ -114,8 +114,8 @@ function collisionDetection() {
 							dx += 1;
 							dy = -dy;
 							dy -= 1;
-							x = canvas.width/2;
-							y = canvas.height - 30;
+							let x = (canvas.width/2) + Math.floor(Math.random()*21)-10;
+							let y = (canvas.height - 30) + Math.floor(Math.random()*21)-10;
 							paddleX = (canvas.width - paddleWidth)/2;
 							paused = true;
 							ctx.beginPath();
@@ -177,8 +177,8 @@ function draw() {
 				alert("GAME OVER")
 				document.location.reload();		
 			} else {
-				x = canvas.width/2;
-				y = canvas.height-30;
+				let x = (canvas.width/2) + Math.floor(Math.random()*21)-10;
+				let y = (canvas.height - 30) + Math.floor(Math.random()*21)-10;
 				paddleX = (canvas.width-paddleWidth)/2;
 			}
 		}
