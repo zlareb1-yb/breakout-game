@@ -4,9 +4,9 @@ let ctx = canvas.getContext('2d')
 
 let x = (canvas.width/2) + Math.floor(Math.random()*21)-10;
 let y = (canvas.height - 30) + Math.floor(Math.random()*21)-10;
-let dx = 1;
-let dy = -1;
-let ballRadius = 10;
+let dx = 3;
+let dy = -3;
+let ballRadius = 15;
 let paddleHeight = 10;
 let paddleWidth = 75;
 let paddleX = (canvas.width - paddleWidth)/2;
@@ -24,6 +24,8 @@ let lives = 3;
 let level = 1;
 let maxLevel = 5
 let paused = false;
+let ball = new Image();
+ball.src = 'https://i.dlpng.com/static/png/6723349_preview.png'
 
 let bricks = [];
 
@@ -78,11 +80,7 @@ function keyUpHandler(e) {
 }
 
 function drawBall() {
-	ctx.beginPath();
-	ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-	ctx.fillStyle = "#0095DD";
-	ctx.fill();
-	ctx.closePath();
+	ctx.drawImage(ball, x, y, ballRadius, ballRadius);
 }
 
 function drawPaddle() {
@@ -114,8 +112,8 @@ function collisionDetection() {
 							dx += 1;
 							dy = -dy;
 							dy -= 1;
-							let x = (canvas.width/2) + Math.floor(Math.random()*21)-10;
-							let y = (canvas.height - 30) + Math.floor(Math.random()*21)-10;
+							x = (canvas.width/2) + Math.floor(Math.random()*21)-10;
+							y = (canvas.height - 30) + Math.floor(Math.random()*21)-10;
 							paddleX = (canvas.width - paddleWidth)/2;
 							paused = true;
 							ctx.beginPath();
@@ -177,8 +175,8 @@ function draw() {
 				alert("GAME OVER")
 				document.location.reload();		
 			} else {
-				let x = (canvas.width/2) + Math.floor(Math.random()*21)-10;
-				let y = (canvas.height - 30) + Math.floor(Math.random()*21)-10;
+				x = (canvas.width/2) + Math.floor(Math.random()*21)-10;
+				y = (canvas.height - 30) + Math.floor(Math.random()*21)-10;
 				paddleX = (canvas.width-paddleWidth)/2;
 			}
 		}
