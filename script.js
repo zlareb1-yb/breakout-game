@@ -122,7 +122,7 @@ function collisionDetection() {
 							ctx.fill();
 							ctx.font = "16px Arial";
 							ctx.fillStyle = "#FFFFFF";
-							ctx.fillText("Level " + (level - 1) + " completed, starting next level...")
+							ctx.fillText("Level " + (level - 1) + " completed, starting next level...", 110, 150)
 							setTimeout(function() {
 								paused = false;
 								draw();
